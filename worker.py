@@ -23,7 +23,7 @@ connection = BlockingConnection(params)
 channel = connection.channel()
 channel.exchange_declare(exchange=BROKER_EXCHANGE_NAME, exchange_type='topic')
 channel.queue_declare(queue=WORKER_QUEUE_NAME, durable=True)
-channel.queue_bind(exchange=BROKER_EXCHANGE_NAME, queue=WORKER_QUEUE_NAME, routing_key="sg.*")
+channel.queue_bind(exchange=BROKER_EXCHANGE_NAME, queue=WORKER_QUEUE_NAME, routing_key="#")
 channel.basic_qos(prefetch_count=20)
 channel.basic_consume(queue=WORKER_QUEUE_NAME, on_message_callback=digest_event)
 
